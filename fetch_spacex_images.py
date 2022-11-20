@@ -16,7 +16,6 @@ def fetch_spacex_by_launch_id(launch_id='latest'):
         file_path = path + image_name
         save_image(file_path, image_url)
 
-# launch_id = '5eb87d42ffd86e000604b384'
 if __name__ == '__main__':
     path = './images/'
     Path(path).mkdir(parents=False, exist_ok=True)
