@@ -57,3 +57,6 @@ From scripts folder:
 ```
 python(or python3) main.py
 ```
+### Example
+Bot will upload photo in telegram chat.
+![space](https://user-images.githubusercontent.com/79669407/202911117-45612c15-d153-4e08-b1f5-c83844675f3f.png)
