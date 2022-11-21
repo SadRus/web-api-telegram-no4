@@ -25,6 +25,8 @@ NASA_TOKEN - for downloading photo.
 
 TG_BOT_TOKEN - you need to create telegram bot via @bot_father and get bot token.
 
+TG_CHAT_ID - telegram channel id.
+
 SEND_PHOTO_DELAY - you can custom delay between send photo by change this variable.
 
 ### Download photos to folder
