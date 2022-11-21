@@ -6,30 +6,31 @@ from funcs import save_image
 from pathlib import Path
 
 
-def fetch_nasa_epic():
+def fetch_nasa_epic(nasa_token, path):
     url = 'https://api.nasa.gov/EPIC/api/natural'
     params = {
-        'api_key': os.environ['NASA_TOKEN']
+        'api_key': nasa_token
         }
     response = requests.get(url, params=params)
     response.raise_for_status()
-    response = response.json()
+    response_json = response.json()
 
-    for number, image_info in enumerate(response, start=1):
-        image = image_info['image']
-        date = image_info['date'].split()[0]
+    for number, json_content in enumerate(response_json, start=1):
+        image = json_content['image']
+        date = json_content['date'].split()[0]
         date = date.replace('-', '/')
-        image_url = f'https://api.nasa.gov/EPIC/archive/natural/{date}/png/{image}.png?api_key={params["api_key"]}'
+        image_url = f'https://api.nasa.gov/EPIC/archive/natural/{date}/png/{image}.png'
         image_name = f'nasa_epic{number}.png'
-        file_path = path + image_name
-        save_image(file_path, image_url)
+        file_path = path / image_name
+        save_image(file_path, image_url, params=params)
 
 if __name__ == '__main__':
     load_dotenv()
-    path = './images/'
+    nasa_token = os.environ['NASA_TOKEN']
+    path = Path('images')
     Path(path).mkdir(parents=False, exist_ok=True)
     
     try:
-        fetch_nasa_epic()
+        fetch_nasa_epic(nasa_token, path)
     except requests.exceptions.HTTPError as error:
         exit(f"Can't get data from server: {error}")
