@@ -13,11 +13,11 @@ def fetch_nasa_epic(nasa_token, path):
         }
     response = requests.get(url, params=params)
     response.raise_for_status()
-    response_json = response.json()
+    json_content = response.json()
 
-    for number, json_content in enumerate(response_json, start=1):
-        image = json_content['image']
-        date = json_content['date'].split()[0]
+    for number, content in enumerate(json_content, start=1):
+        image = content['image']
+        date = content['date'].split()[0]
         date = date.replace('-', '/')
         image_url = f'https://api.nasa.gov/EPIC/archive/natural/{date}/png/{image}.png'
         image_name = f'nasa_epic{number}.png'

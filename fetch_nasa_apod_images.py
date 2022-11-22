@@ -14,9 +14,9 @@ def fetch_nasa_apod(nasa_token, path, image_count=5):
         }
     response = requests.get(url, params=params)
     response.raise_for_status()
-    response_json = response.json()
+    json_content = response.json()
 
-    for number, apod in enumerate(response_json, start=1):
+    for number, apod in enumerate(json_content, start=1):
         image_name = f'nasa_apod{number}.jpg'
         image_url = apod['url']
         file_path = path / image_name

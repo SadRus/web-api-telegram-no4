@@ -9,8 +9,8 @@ def fetch_spacex_by_launch_id(path, launch_id='latest'):
     url = f'https://api.spacexdata.com/v5/launches/{launch_id}'
     response = requests.get(url)
     response.raise_for_status()
-    response_json = response.json()
-    images_url = response_json['links']['flickr']['original']
+    json_content = response.json()
+    images_url = json_content['links']['flickr']['original']
     for number, image_url in enumerate(images_url, start=1):
         image_name = f'spacex{number}.jpg'
         file_path = path / image_name
